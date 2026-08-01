@@ -23,7 +23,7 @@ python3 prepare_site.py --source ../text/vol01 --out .
 
 ## Deploy to Vercel
 
-Static site — no build step. Push to GitHub; Vercel deploys on every push to `main`.
+Live: **https://ai-bao-han-tu-tien.vercel.app**
 
 ```bash
 python3 prepare_site.py
