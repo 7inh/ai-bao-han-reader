@@ -7,6 +7,7 @@
   const MIN_FONT = 0.9;
   const MAX_FONT = 1.4;
   const TOC_WINDOW = 80;
+  const DESKTOP_MQ = "(min-width: 768px)";
   const SITE_TITLE = "Ai Bảo Hắn Tu Tiên";
 
   let chapters = [];
@@ -102,12 +103,22 @@
     progressFill.style.width = `${pct}%`;
   }
 
+  function isDesktop() {
+    return window.matchMedia(DESKTOP_MQ).matches;
+  }
+
+  function syncReadingLayout() {
+    const reading = currentN != null;
+    document.body.classList.toggle("is-reading", reading && isDesktop());
+    desktopToc.classList.toggle("hidden", !reading || !isDesktop());
+  }
+
   function showLanding() {
     landingView.classList.remove("hidden");
     readerView.classList.add("hidden");
     bottomNav.classList.add("hidden");
     desktopToc.classList.add("hidden");
-    readerView.classList.remove("is-with-desktop-toc");
+    document.body.classList.remove("is-reading");
     progressTrack.classList.add("hidden");
     document.title = SITE_TITLE;
     currentN = null;
@@ -119,10 +130,7 @@
     landingView.classList.add("hidden");
     readerView.classList.remove("hidden");
     bottomNav.classList.remove("hidden");
-    if (window.matchMedia("(min-width: 768px)").matches) {
-      desktopToc.classList.remove("hidden");
-      readerView.classList.add("is-with-desktop-toc");
-    }
+    syncReadingLayout();
     progressTrack.classList.remove("hidden");
   }
 
@@ -245,6 +253,24 @@
     activeSheet = null;
   }
 
+  function focusDesktopToc() {
+    const input = $("desktopSearchInput");
+    input?.focus();
+    const active = desktopTocList.querySelector(".toc-item.active");
+    if (active) {
+      active.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    }
+  }
+
+  function openToc() {
+    if (isDesktop()) {
+      closeAllSheets();
+      focusDesktopToc();
+      return;
+    }
+    openSheet(tocSheet);
+  }
+
   function bindTocClicks(container) {
     container.addEventListener("click", (e) => {
       const btn = e.target.closest("[data-n]");
@@ -319,7 +345,7 @@
 
   $("startBtn").onclick = () => openChapter(1);
   $("homeBtn").onclick = showLanding;
-  $("tocBtn").onclick = () => openSheet(tocSheet);
+  $("tocBtn").onclick = openToc;
   $("settingsBtn").onclick = () => openSheet(settingsSheet);
   $("closeTocBtn").onclick = closeAllSheets;
   $("closeSettingsBtn").onclick = closeAllSheets;
@@ -375,17 +401,8 @@
   });
 
   window.addEventListener("resize", () => {
-    if (currentN == null) {
-      desktopToc.classList.add("hidden");
-      return;
-    }
-    if (window.matchMedia("(min-width: 768px)").matches) {
-      desktopToc.classList.remove("hidden");
-      readerView.classList.add("is-with-desktop-toc");
-    } else {
-      desktopToc.classList.add("hidden");
-      readerView.classList.remove("is-with-desktop-toc");
-    }
+    syncReadingLayout();
+    if (activeSheet === tocSheet && isDesktop()) closeAllSheets();
   });
 
   setupScrollCollapse();
