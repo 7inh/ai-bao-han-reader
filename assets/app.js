@@ -26,6 +26,7 @@
   const progressFill = $("progressFill");
   const chapterTitle = $("chapterTitle");
   const chapterMeta = $("chapterMeta");
+  const chapterUpdated = $("chapterUpdated");
   const chapterContent = $("chapterContent");
   const chapterCountMeta = $("chapterCountMeta");
   const resumeBtn = $("resumeBtn");
@@ -36,6 +37,13 @@
   const sheetBackdrop = $("sheetBackdrop");
   const tocSheet = $("tocSheet");
   const settingsSheet = $("settingsSheet");
+
+  function formatUpdatedAt(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleString("vi-VN", { dateStyle: "short", timeStyle: "short" });
+  }
 
   function escapeHtml(text) {
     return String(text)
@@ -175,7 +183,8 @@
       .map(
         (c) => `
         <button type="button" class="toc-item${c.n === currentN ? " active" : ""}" data-n="${c.n}">
-          ${escapeHtml(c.title)}
+          <span class="toc-item__title">${escapeHtml(c.title)}</span>
+          ${c.updated_at ? `<span class="toc-item__date">${escapeHtml(formatUpdatedAt(c.updated_at))}</span>` : ""}
         </button>`
       )
       .join("");
@@ -213,6 +222,13 @@
     showReaderShell();
     chapterTitle.textContent = ch.title;
     chapterMeta.textContent = `Chương ${n} · ${ch.story}`;
+    if (ch.updated_at) {
+      chapterUpdated.textContent = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
+      chapterUpdated.classList.remove("hidden");
+    } else {
+      chapterUpdated.textContent = "";
+      chapterUpdated.classList.add("hidden");
+    }
     document.title = `${ch.title} · ${SITE_TITLE}`;
     showSkeleton();
     updateNavButtons();

@@ -310,6 +310,12 @@ button {
   letter-spacing: 0.06em;
 }
 
+.chapter-updated {
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
 .reader-top__title {
   margin: 0.15rem 0 0;
   font-family: var(--serif-display);
@@ -575,6 +581,22 @@ button {
   background: var(--accent-soft);
   color: var(--accent);
   font-weight: 600;
+}
+
+.toc-item__title {
+  display: block;
+}
+
+.toc-item__date {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.72rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.toc-item.active .toc-item__date {
+  color: var(--muted);
 }
 
 .toc-empty {

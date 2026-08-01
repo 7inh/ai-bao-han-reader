@@ -9,43 +9,50 @@
     "n": 2,
     "title": "Chương 2: Hôm nay thích hợp đi xa, không nên gian lận (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-2.txt"
+    "path": "chapters/chuong-2.txt",
+    "updated_at": "2026-08-01T22:10:18+07:00"
   },
   {
     "n": 3,
     "title": "Chương 3: Đơn Linh Căn",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-3.txt"
+    "path": "chapters/chuong-3.txt",
+    "updated_at": "2026-08-01T22:51:02+07:00"
   },
   {
     "n": 4,
     "title": "Chương 4: Nhìn Chính Là Người Thành Thật",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-4.txt"
+    "path": "chapters/chuong-4.txt",
+    "updated_at": "2026-08-01T23:36:08+07:00"
   },
   {
     "n": 5,
-    "title": "Chương 5: Ngươi Đưa Ra Đây",
+    "title": "Chương 6: Ta cảm thấy khảo nghiệm cửa thứ ba chính là trí tuệ",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-5.txt"
+    "path": "chapters/chuong-5.txt",
+    "updated_at": "2026-08-01T23:37:50+07:00"
   },
   {
     "n": 6,
-    "title": "Chương 6: Ta cảm thấy khảo nghiệm cửa thứ ba chính là trí tuệ",
+    "title": "Chương 7: Đái sư Huynh, ngươi phải tỉnh táo",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-6.txt"
+    "path": "chapters/chuong-6.txt",
+    "updated_at": "2026-08-01T23:55:22+07:00"
   },
   {
     "n": 7,
-    "title": "Chương 7: Đái sư Huynh, ngươi phải tỉnh táo",
+    "title": "Chương 8: Các trưởng lão khiêm nhường",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-7.txt"
+    "path": "chapters/chuong-7.txt",
+    "updated_at": "2026-08-01T23:57:03+07:00"
   },
   {
     "n": 8,
-    "title": "Chương 8: Các trưởng lão khiêm nhường",
+    "title": "Chương 9: Cấm thư « Long Phượng biến »",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-8.txt"
+    "path": "chapters/chuong-8.txt",
+    "updated_at": "2026-08-01T23:58:05+07:00"
   },
   {
     "n": 9,
@@ -709,9 +716,10 @@
   },
   {
     "n": 119,
-    "title": "Chương 107: Đào mệnh! (1)",
+    "title": "Chương 10: Trung Ương Đại Lục",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-119.txt"
+    "path": "chapters/chuong-119.txt",
+    "updated_at": "2026-08-01T23:59:09+07:00"
   },
   {
     "n": 120,
@@ -1375,9 +1383,10 @@
   },
   {
     "n": 230,
-    "title": "Chương 117: Cục đá ám khí",
+    "title": "Chương 11: Đan Đỉnh Phong",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-230.txt"
+    "path": "chapters/chuong-230.txt",
+    "updated_at": "2026-08-02T00:00:27+07:00"
   },
   {
     "n": 231,
@@ -2041,9 +2050,10 @@
   },
   {
     "n": 341,
-    "title": "Chương 127: Học Tập Ẩn Thân Phù (2)",
+    "title": "Chương 12: Bái Sư Học Nghệ (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-341.txt"
+    "path": "chapters/chuong-341.txt",
+    "updated_at": "2026-08-02T00:01:11+07:00"
   },
   {
     "n": 342,
@@ -2707,9 +2717,10 @@
   },
   {
     "n": 452,
-    "title": "Chương 137: Chẳng lẽ quyển sách này chính là cấm thư trong truyền thuyết kia...",
+    "title": "Chương 13: Bái Sư Học Nghệ (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-452.txt"
+    "path": "chapters/chuong-452.txt",
+    "updated_at": "2026-08-02T00:01:56+07:00"
   },
   {
     "n": 453,
@@ -3373,9 +3384,10 @@
   },
   {
     "n": 563,
-    "title": "Chương 147: Đây chính là kinh hỉ- (1)",
+    "title": "Chương 14: Cử trọng nhược khinh, cử khinh nhược trọng",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-563.txt"
+    "path": "chapters/chuong-563.txt",
+    "updated_at": "2026-08-02T00:03:05+07:00"
   },
   {
     "n": 564,
@@ -4039,9 +4051,10 @@
   },
   {
     "n": 674,
-    "title": "Chương 157: Khải hoàn mà về",
+    "title": "Chương 15: Dẫn Khí Nhập Thể (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-674.txt"
+    "path": "chapters/chuong-674.txt",
+    "updated_at": "2026-08-02T00:04:06+07:00"
   },
   {
     "n": 675,
@@ -4705,9 +4718,10 @@
   },
   {
     "n": 785,
-    "title": "Chương 167: Nguyên nhân Bất Ngữ đạo nhân bị cầm tù (2)",
+    "title": "Chương 16: Dẫn Khí Nhập Thể (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-785.txt"
+    "path": "chapters/chuong-785.txt",
+    "updated_at": "2026-08-02T00:05:10+07:00"
   },
   {
     "n": 786,
@@ -4717,57 +4731,66 @@
   },
   {
     "n": 787,
-    "title": "Chương 1698: Có tên gian thần này, vương triều Đậu Nành lo gì không hưng thịnh!",
+    "title": "1701_Chương 1699. Có tên gian thần này, vương triều Đậu Nành lo gì không hưng thịnh!",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-787.txt"
+    "path": "chapters/chuong-787.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 788,
-    "title": "1701_Chương 1699. Có tên gian thần này, vương triều Đậu Nành lo gì không hưng thịnh!",
+    "title": "1702_Chương 1700. Mạnh Cảnh Chu gặp nạn",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-788.txt"
+    "path": "chapters/chuong-788.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 789,
-    "title": "1702_Chương 1700. Mạnh Cảnh Chu gặp nạn",
+    "title": "1703_Chương 1701. Tranh giành tình cảm 1",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-789.txt"
+    "path": "chapters/chuong-789.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 790,
-    "title": "1703_Chương 1701. Tranh giành tình cảm 1",
+    "title": "1704_Chương 1702. Tranh giành tình cảm 2",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-790.txt"
+    "path": "chapters/chuong-790.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 791,
-    "title": "1704_Chương 1702. Tranh giành tình cảm 2",
+    "title": "1705_Chương 1703. Vấn Đạo tông, ai là người mạnh thứ hai-",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-791.txt"
+    "path": "chapters/chuong-791.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 792,
-    "title": "1705_Chương 1703. Vấn Đạo tông, ai là người mạnh thứ hai-",
+    "title": "1706_Chương 1704. Tiểu Lục, tương lai vị trí Tông chủ này ngoài ngươi ra không còn ai",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-792.txt"
+    "path": "chapters/chuong-792.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 793,
-    "title": "1706_Chương 1704. Tiểu Lục, tương lai vị trí Tông chủ này ngoài ngươi ra không còn ai",
+    "title": "1707_Chương 1705. Tiểu Lục, tương lai vị trí Tông chủ này ngoài ngươi ra không còn ai",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-793.txt"
+    "path": "chapters/chuong-793.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 794,
-    "title": "1707_Chương 1705. Tiểu Lục, tương lai vị trí Tông chủ này ngoài ngươi ra không còn ai",
+    "title": "1708_Chương 1706. Sáng Tạo Pháp",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-794.txt"
+    "path": "chapters/chuong-794.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 795,
-    "title": "1708_Chương 1706. Sáng Tạo Pháp",
+    "title": "1709_Chương 1707. Đậu Nành Kiếm Pháp 1",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-795.txt"
+    "path": "chapters/chuong-795.txt",
+    "updated_at": "2026-08-01T19:34:20+07:00"
   },
   {
     "n": 796,
@@ -4777,45 +4800,52 @@
   },
   {
     "n": 797,
-    "title": "Chương 168: Lục Dương tam vấn",
+    "title": "1710_Chương 1708. Đậu Nành Kiếm Pháp 2",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-797.txt"
+    "path": "chapters/chuong-797.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 798,
-    "title": "1710_Chương 1708. Đậu Nành Kiếm Pháp 2",
+    "title": "1711_Chương 1709. Tương Hỗ Tiến Bộ, Cùng Nhau Đột Phá 1",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-798.txt"
+    "path": "chapters/chuong-798.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 799,
-    "title": "1711_Chương 1709. Tương Hỗ Tiến Bộ, Cùng Nhau Đột Phá 1",
+    "title": "1712_Chương 1710. Tương Hỗ Tiến Bộ, Cùng Nhau Đột Phá 2",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-799.txt"
+    "path": "chapters/chuong-799.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 800,
-    "title": "1712_Chương 1710. Tương Hỗ Tiến Bộ, Cùng Nhau Đột Phá 2",
+    "title": "1713_Chương 1711. Thiên kiếp hạng nhất lại được nâng cấp",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-800.txt"
+    "path": "chapters/chuong-800.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 801,
-    "title": "1713_Chương 1711. Thiên kiếp hạng nhất lại được nâng cấp",
+    "title": "1714_Chương 1712. Mệnh ta do ta, không do trời! 1",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-801.txt"
+    "path": "chapters/chuong-801.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 802,
-    "title": "1714_Chương 1712. Mệnh ta do ta, không do trời! 1",
+    "title": "1715_Chương 1713. Mệnh ta do ta, không do trời! 2",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-802.txt"
+    "path": "chapters/chuong-802.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 803,
-    "title": "1715_Chương 1713. Mệnh ta do ta, không do trời! 2",
+    "title": "1716_Chương 1714. Luyện Hư kỳ",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-803.txt"
+    "path": "chapters/chuong-803.txt",
+    "updated_at": "2026-08-01T19:34:21+07:00"
   },
   {
     "n": 804,
@@ -9877,9 +9907,10 @@
   },
   {
     "n": 1647,
-    "title": "Chương 617: Nam tử đội mũ giấy trắng",
+    "title": "61_Chương 50",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-1647.txt"
+    "path": "chapters/chuong-1647.txt",
+    "updated_at": "2026-08-01T19:33:12+07:00"
   },
   {
     "n": 1648,
@@ -10009,9 +10040,10 @@
   },
   {
     "n": 1669,
-    "title": "Chương 637: Sương cốc chủ- Nguyền rủa không có hiệu lực với ta",
+    "title": "63_Chương 61",
     "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-1669.txt"
+    "path": "chapters/chuong-1669.txt",
+    "updated_at": "2026-08-01T19:33:12+07:00"
   },
   {
     "n": 1670,
@@ -12388,11 +12420,5 @@
     "title": "Chương 997: Tự lực cánh sinh",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2065.txt"
-  },
-  {
-    "n": 2066,
-    "title": "Chương 97: Phương Thức Thông Quan Chính Xác (1)",
-    "story": "Ai Bảo Hắn Tu Tiên",
-    "path": "chapters/chuong-2066.txt"
   }
 ]
