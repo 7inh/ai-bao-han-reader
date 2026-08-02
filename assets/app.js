@@ -44,7 +44,17 @@
     if (!iso) return "";
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return "";
-    return d.toLocaleString("vi-VN", { dateStyle: "short", timeStyle: "short" });
+    return d.toLocaleString("vi-VN", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+      timeZone: "Asia/Ho_Chi_Minh",
+    });
   }
 
   function escapeHtml(text) {
