@@ -12,6 +12,8 @@
 
   let chapters = [];
   let byN = {};
+  let byStoryNo = {};
+  let maxStoryNo = 0;
   let currentN = null;
   let searchQuery = "";
   let activeSheet = null;
@@ -91,13 +93,28 @@
     return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
   }
 
-  function parseHash() {
-    const match = location.hash.match(/^#ch=(\d+)$/);
-    return match ? Number(match[1]) : null;
+  function displayChapterNo(ch) {
+    if (!ch) return null;
+    return ch.story_no ?? ch.n;
   }
 
-  function setHash(n) {
-    const next = `#ch=${n}`;
+  function resolveReaderN(input) {
+    const num = Number(input);
+    if (!Number.isFinite(num) || num < 1) return null;
+    if (byStoryNo[num]) return byStoryNo[num].n;
+    if (byN[num]) return num;
+    return null;
+  }
+
+  function parseHash() {
+    const match = location.hash.match(/^#ch=(\d+)$/);
+    return match ? resolveReaderN(match[1]) : null;
+  }
+
+  function setHash(readerN) {
+    const ch = byN[readerN];
+    const display = displayChapterNo(ch) ?? readerN;
+    const next = `#ch=${display}`;
     if (location.hash !== next) history.pushState(null, "", next);
   }
 
@@ -146,7 +163,10 @@
     const idx = chapters.findIndex((c) => c.n === currentN);
     $("prevBtn").disabled = idx <= 0;
     $("nextBtn").disabled = idx < 0 || idx >= chapters.length - 1;
-    const label = idx >= 0 ? `${currentN}/${chapters.length}` : "—";
+    const ch = byN[currentN];
+    const displayNo = displayChapterNo(ch) ?? currentN;
+    const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
+    const label = idx >= 0 ? `${displayNo}/${total}` : "—";
     $("navCenter").textContent = label;
     updateProgress();
   }
@@ -221,7 +241,7 @@
     currentN = n;
     showReaderShell();
     chapterTitle.textContent = ch.title;
-    chapterMeta.textContent = `Chương ${n} · ${ch.story}`;
+    chapterMeta.textContent = `Chương ${displayChapterNo(ch) ?? n} · ${ch.story}`;
     if (ch.updated_at) {
       chapterUpdated.textContent = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
       chapterUpdated.classList.remove("hidden");
@@ -343,9 +363,18 @@
     if (!res.ok) throw new Error("Không tải được chapters.json");
     chapters = await res.json();
     byN = Object.fromEntries(chapters.map((c) => [c.n, c]));
+    byStoryNo = {};
+    maxStoryNo = 0;
+    for (const c of chapters) {
+      if (c.story_no != null) {
+        byStoryNo[c.story_no] = c;
+        maxStoryNo = Math.max(maxStoryNo, c.story_no);
+      }
+    }
 
-    chapterCountMeta.textContent = `${chapters.length.toLocaleString("vi-VN")} chương`;
-    $("jumpInput").max = String(chapters.length);
+    chapterCountMeta.textContent = `${maxStoryNo || chapters.length} chương`;
+    $("jumpInput").max = String(maxStoryNo || chapters.length);
+    $("jumpInput").placeholder = "Số chương";
 
     const saved = Number(localStorage.getItem(STORAGE_KEY));
     if (Number.isFinite(saved) && byN[saved]) {
@@ -368,8 +397,8 @@
   sheetBackdrop.onclick = closeAllSheets;
 
   $("jumpBtn").onclick = () => {
-    const n = Number($("jumpInput").value);
-    if (byN[n]) openChapter(n);
+    const n = resolveReaderN($("jumpInput").value);
+    if (n) openChapter(n);
   };
   $("jumpInput").addEventListener("keydown", (e) => {
     if (e.key === "Enter") $("jumpBtn").click();
