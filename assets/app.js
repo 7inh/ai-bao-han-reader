@@ -174,10 +174,18 @@
     $("prevBtn").disabled = idx <= 0;
     $("nextBtn").disabled = idx < 0 || idx >= chapters.length - 1;
     const ch = byN[currentN];
-    const displayNo = displayChapterNo(ch) ?? currentN;
-    const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
-    const label = idx >= 0 ? `${displayNo}/${total}` : "—";
-    $("navCenter").textContent = label;
+    const navCenter = $("navCenter");
+    if (idx >= 0 && ch?.updated_at) {
+      navCenter.textContent = formatUpdatedAt(ch.updated_at);
+      navCenter.dateTime = ch.updated_at;
+      navCenter.title = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
+    } else {
+      const displayNo = displayChapterNo(ch) ?? currentN;
+      const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
+      navCenter.textContent = idx >= 0 ? `${displayNo}/${total}` : "—";
+      navCenter.dateTime = "";
+      navCenter.title = "";
+    }
     updateProgress();
   }
 
@@ -252,13 +260,8 @@
     showReaderShell();
     chapterTitle.textContent = ch.title;
     chapterMeta.textContent = `Chương ${displayChapterNo(ch) ?? n} · ${ch.story}`;
-    if (ch.updated_at) {
-      chapterUpdated.textContent = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
-      chapterUpdated.classList.remove("hidden");
-    } else {
-      chapterUpdated.textContent = "";
-      chapterUpdated.classList.add("hidden");
-    }
+    chapterUpdated.textContent = "";
+    chapterUpdated.classList.add("hidden");
     document.title = `${ch.title} · ${SITE_TITLE}`;
     showSkeleton();
     updateNavButtons();

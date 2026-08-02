@@ -298,6 +298,11 @@ button {
   display: none;
 }
 
+.reader-top.is-collapsed .reader-top__count {
+  font-size: 0.62rem;
+  max-width: 9rem;
+}
+
 .reader-top__meta {
   min-width: 0;
 }
@@ -327,10 +332,13 @@ button {
 }
 
 .reader-top__count {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--muted);
-  white-space: nowrap;
+  text-align: right;
+  max-width: 11rem;
+  white-space: normal;
 }
 
 .chapter-body {
