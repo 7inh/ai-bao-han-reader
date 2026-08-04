@@ -57,24 +57,27 @@
   },
   {
     "n": 9,
-    "title": "1709_Chương 1707. Đậu Nành Kiếm Pháp 1",
+    "title": "Chương 998: Làm việc thiện tích đức (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-9.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-04T21:36:00+07:00",
+    "story_no": 998
   },
   {
     "n": 10,
-    "title": "1710_Chương 1708. Đậu Nành Kiếm Pháp 2",
+    "title": "Chương 999: Làm việc thiện tích đức (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-10.txt",
-    "updated_at": "2026-08-01T19:34:21+07:00"
+    "updated_at": "2026-08-01T19:33:51+07:00",
+    "story_no": 999
   },
   {
     "n": 11,
-    "title": "1711_Chương 1709. Tương Hỗ Tiến Bộ, Cùng Nhau Đột Phá 1",
+    "title": "Chương 1000: Khuyên bảo",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-11.txt",
-    "updated_at": "2026-08-01T19:34:21+07:00"
+    "updated_at": "2026-08-01T19:33:51+07:00",
+    "story_no": 1000
   },
   {
     "n": 12,
@@ -16425,51 +16428,51 @@
   },
   {
     "n": 2056,
-    "title": "Chương 2058: Toàn Tri",
+    "title": "Chương 992: Gặp gỡ (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2056.txt",
-    "updated_at": "2026-08-01T19:34:34+07:00",
-    "story_no": 2058
+    "updated_at": "2026-08-04T21:39:37+07:00",
+    "story_no": 992
   },
   {
     "n": 2057,
-    "title": "Chương 2059: Toàn Tri (2)",
+    "title": "Chương 993: Gặp gỡ (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2057.txt",
-    "updated_at": "2026-08-01T19:34:34+07:00",
-    "story_no": 2059
+    "updated_at": "2026-08-04T21:40:39+07:00",
+    "story_no": 993
   },
   {
     "n": 2058,
-    "title": "Chương 2060: Tương lai tối cường",
+    "title": "Chương 994: Cao tăng đắc đạo",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2058.txt",
-    "updated_at": "2026-08-01T19:34:34+07:00",
-    "story_no": 2060
+    "updated_at": "2026-08-04T21:41:46+07:00",
+    "story_no": 994
   },
   {
     "n": 2059,
-    "title": "Chương 2061: Tương lai tối cường (2)",
+    "title": "Chương 995: Sát thủ (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2059.txt",
-    "updated_at": "2026-08-01T19:34:34+07:00",
-    "story_no": 2061
+    "updated_at": "2026-08-04T21:42:58+07:00",
+    "story_no": 995
   },
   {
     "n": 2060,
-    "title": "Chương 2062: Đại Kết Cục",
+    "title": "Chương 996: Sát thủ (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2060.txt",
-    "updated_at": "2026-08-01T19:34:34+07:00",
-    "story_no": 2062
+    "updated_at": "2026-08-04T21:45:50+07:00",
+    "story_no": 996
   },
   {
     "n": 2061,
-    "title": "Chương 2063: Đại Kết Cục (2)",
+    "title": "Chương 997: Tự lực cánh sinh",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2061.txt",
-    "updated_at": "2026-08-01T19:34:35+07:00",
-    "story_no": 2063
+    "updated_at": "2026-08-04T21:46:36+07:00",
+    "story_no": 997
   },
   {
     "n": 2062,
