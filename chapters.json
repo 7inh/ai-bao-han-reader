@@ -1,38 +1,43 @@
 [
   {
     "n": 1,
-    "title": "1701_Chương 1699. Có tên gian thần này, vương triều Đậu Nành lo gì không hưng thịnh!",
+    "title": "Chương 1: Hôm nay thích hợp đi xa, không nên gian lận",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-1.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-05T07:27:04+07:00",
+    "story_no": 1
   },
   {
     "n": 2,
-    "title": "1702_Chương 1700. Mạnh Cảnh Chu gặp nạn",
+    "title": "Chương 2: Hôm nay thích hợp đi xa, không nên gian lận (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-2.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-05T07:28:19+07:00",
+    "story_no": 2
   },
   {
     "n": 3,
-    "title": "1703_Chương 1701. Tranh giành tình cảm 1",
+    "title": "Chương 3: Đơn Linh Căn",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-3.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-05T07:30:13+07:00",
+    "story_no": 3
   },
   {
     "n": 4,
-    "title": "1704_Chương 1702. Tranh giành tình cảm 2",
+    "title": "Chương 4: Nhìn Chính Là Người Thành Thật",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-4.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-01T23:36:08+07:00",
+    "story_no": 4
   },
   {
     "n": 5,
-    "title": "1705_Chương 1703. Vấn Đạo tông, ai là người mạnh thứ hai-",
+    "title": "Chương 5: Ngươi Đưa Ra Đây",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-5.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-05T07:32:07+07:00",
+    "story_no": 5
   },
   {
     "n": 6,
