@@ -96,55 +96,59 @@
   },
   {
     "n": 13,
-    "title": "1713_Chương 1711. Thiên kiếp hạng nhất lại được nâng cấp",
+    "title": "Chương 1001: Nhập mộng (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-13.txt",
-    "updated_at": "2026-08-01T19:34:21+07:00"
+    "updated_at": "2026-08-05T19:17:27+07:00",
+    "story_no": 1001
   },
   {
     "n": 14,
-    "title": "1714_Chương 1712. Mệnh ta do ta, không do trời! 1",
+    "title": "Chương 1002: Nhập mộng (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-14.txt",
-    "updated_at": "2026-08-01T19:34:21+07:00"
+    "updated_at": "2026-08-05T19:19:23+07:00",
+    "story_no": 1002
   },
   {
     "n": 15,
-    "title": "1715_Chương 1713. Mệnh ta do ta, không do trời! 2",
+    "title": "Chương 1003: Mặt dây chuyền",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-15.txt",
-    "updated_at": "2026-08-01T19:34:21+07:00"
+    "updated_at": "2026-08-05T19:21:16+07:00",
+    "story_no": 1003
   },
   {
     "n": 16,
-    "title": "1716_Chương 1714. Luyện Hư kỳ",
+    "title": "Chương 1004: Phúc duyên thâm hậu (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-16.txt",
-    "updated_at": "2026-08-01T19:34:21+07:00"
+    "updated_at": "2026-08-05T19:23:02+07:00",
+    "story_no": 1004
   },
   {
     "n": 17,
-    "title": "Chương 1: Hôm nay thích hợp đi xa, không nên gian lận",
+    "title": "Chương 1005: Phúc duyên thâm hậu (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-17.txt",
-    "updated_at": "2026-08-02T11:44:19+07:00",
-    "story_no": 1
+    "updated_at": "2026-08-05T19:24:48+07:00",
+    "story_no": 1005
   },
   {
     "n": 18,
-    "title": "Chương 2: Hôm nay thích hợp đi xa, không nên gian lận (2)",
+    "title": "Chương 1006: Hiệu suất cao",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-18.txt",
-    "updated_at": "2026-08-02T11:44:19+07:00",
-    "story_no": 2
+    "updated_at": "2026-08-05T19:26:29+07:00",
+    "story_no": 1006
   },
   {
     "n": 19,
-    "title": "Chương 3: Đơn Linh Căn",
+    "title": "Chương 1007: Mai phục (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-19.txt",
-    "updated_at": "2026-08-01T22:51:02+07:00",
-    "story_no": 3
+    "updated_at": "2026-08-05T19:28:22+07:00",
+    "story_no": 1007
   },
   {
     "n": 20,
@@ -156,27 +160,27 @@
   },
   {
     "n": 21,
-    "title": "Chương 6: Ta cảm thấy khảo nghiệm cửa thứ ba chính là trí tuệ",
+    "title": "Chương 1008: Mai phục (2)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-21.txt",
-    "updated_at": "2026-08-02T07:33:44+07:00",
-    "story_no": 6
+    "updated_at": "2026-08-05T19:29:57+07:00",
+    "story_no": 1008
   },
   {
     "n": 22,
-    "title": "Chương 7: Đái sư Huynh, ngươi phải tỉnh táo",
+    "title": "Chương 1009: Học tập quyền pháp",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-22.txt",
-    "updated_at": "2026-08-01T23:55:22+07:00",
-    "story_no": 7
+    "updated_at": "2026-08-05T19:31:41+07:00",
+    "story_no": 1009
   },
   {
     "n": 23,
-    "title": "Chương 8: Các trưởng lão khiêm nhường",
+    "title": "Chương 1010: Đại khoái nhân tâm (1)",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-23.txt",
-    "updated_at": "2026-08-01T23:57:03+07:00",
-    "story_no": 8
+    "updated_at": "2026-08-05T19:33:18+07:00",
+    "story_no": 1010
   },
   {
     "n": 24,
