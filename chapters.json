@@ -41,32 +41,35 @@
   },
   {
     "n": 6,
-    "title": "1706_Chương 1704. Tiểu Lục, tương lai vị trí Tông chủ này ngoài ngươi ra không còn ai",
+    "title": "Chương 6: Ta cảm thấy khảo nghiệm cửa thứ ba chính là trí tuệ",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-6.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-02T07:33:44+07:00",
+    "story_no": 6
   },
   {
     "n": 7,
-    "title": "1707_Chương 1705. Tiểu Lục, tương lai vị trí Tông chủ này ngoài ngươi ra không còn ai",
+    "title": "Chương 7: Đái sư Huynh, ngươi phải tỉnh táo",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-7.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-01T23:55:22+07:00",
+    "story_no": 7
   },
   {
     "n": 8,
-    "title": "1708_Chương 1706. Sáng Tạo Pháp",
+    "title": "Chương 8: Các trưởng lão khiêm nhường",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-8.txt",
-    "updated_at": "2026-08-01T19:34:20+07:00"
+    "updated_at": "2026-08-01T23:57:03+07:00",
+    "story_no": 8
   },
   {
     "n": 9,
-    "title": "Chương 998: Làm việc thiện tích đức (1)",
+    "title": "Chương 9: Cấm thư « Long Phượng biến »",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-9.txt",
-    "updated_at": "2026-08-04T21:36:00+07:00",
-    "story_no": 998
+    "updated_at": "2026-08-01T23:58:05+07:00",
+    "story_no": 9
   },
   {
     "n": 10,
@@ -945,11 +948,11 @@
   },
   {
     "n": 120,
-    "title": "Chương 105: Nội ứng của Chính đạo (2)",
+    "title": "Chương 10: Trung Ương Đại Lục",
     "story": "Ai Bảo Hắn Tu Tiên",
     "path": "chapters/chuong-120.txt",
-    "updated_at": "2026-08-02T18:15:12+07:00",
-    "story_no": 105
+    "updated_at": "2026-08-01T23:59:09+07:00",
+    "story_no": 10
   },
   {
     "n": 121,
