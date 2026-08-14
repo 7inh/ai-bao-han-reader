@@ -1,9 +1,9 @@
 (() => {
   "use strict";
 
-  const DEFAULT_OVERSCAN = 12;
+  const DEFAULT_OVERSCAN = 16;
 
-  function measureTocItemHeight() {
+  function measureTocItemHeight(sampleWidth) {
     const probe = document.createElement("button");
     probe.type = "button";
     probe.className = "toc-item";
@@ -11,34 +11,59 @@
       '<span class="toc-item__title">Chương 9999: Tiêu đề mẫu cho mục lục</span>' +
       '<span class="toc-item__date">01/01/2026, 00:00</span>';
     probe.style.cssText =
-      "position:fixed;left:-9999px;top:0;visibility:hidden;pointer-events:none;width:280px";
+      "position:fixed;left:-9999px;top:0;visibility:hidden;pointer-events:none;";
+    if (sampleWidth > 0) probe.style.width = `${sampleWidth}px`;
     document.body.appendChild(probe);
     const height = probe.offsetHeight;
     probe.remove();
     return height || 72;
   }
 
-  function createVirtualTocList(container, { onSelect, escapeHtml, formatUpdatedAt, overscan = DEFAULT_OVERSCAN } = {}) {
+  function createVirtualTocList(
+    container,
+    { onSelect, escapeHtml, formatUpdatedAt, overscan = DEFAULT_OVERSCAN } = {}
+  ) {
     let items = [];
     let currentN = null;
-    let itemHeight = measureTocItemHeight();
+    let itemHeight = 72;
     let rafId = 0;
 
     container.classList.add("toc-virtual");
     container.innerHTML =
-      '<div class="toc-virtual__track" aria-hidden="true"></div>' +
-      '<div class="toc-virtual__items" role="list"></div>';
+      '<div class="toc-virtual__spacer" aria-hidden="true">' +
+      '<div class="toc-virtual__items" role="list"></div>' +
+      "</div>";
 
-    const track = container.querySelector(".toc-virtual__track");
+    const spacer = container.querySelector(".toc-virtual__spacer");
     const itemsEl = container.querySelector(".toc-virtual__items");
 
-    function render() {
+    function measureHeight() {
+      const width = container.clientWidth || container.getBoundingClientRect().width;
+      const next = measureTocItemHeight(width > 0 ? width - 16 : 0);
+      if (next > 0) itemHeight = next;
+    }
+
+    function renderItem(chapter) {
+      return `
+        <button type="button" class="toc-item${chapter.n === currentN ? " active" : ""}" data-n="${chapter.n}" role="listitem">
+          <span class="toc-item__title">${escapeHtml(chapter.title)}</span>
+          ${
+            chapter.updated_at
+              ? `<span class="toc-item__date">${escapeHtml(formatUpdatedAt(chapter.updated_at))}</span>`
+              : ""
+          }
+        </button>`;
+    }
+
+    function render({ forceHeight = false } = {}) {
       if (!items.length) {
-        track.style.height = "0";
+        spacer.style.height = "0";
         itemsEl.style.transform = "";
         itemsEl.innerHTML = '<div class="toc-empty">Không có kết quả.</div>';
         return;
       }
+
+      if (forceHeight || itemHeight <= 0) measureHeight();
 
       const scrollTop = container.scrollTop;
       const viewHeight = container.clientHeight || 0;
@@ -47,34 +72,22 @@
       start = Math.max(0, start);
       end = Math.min(items.length, end);
 
-      track.style.height = `${items.length * itemHeight}px`;
+      spacer.style.height = `${items.length * itemHeight}px`;
       itemsEl.style.transform = `translate3d(0, ${start * itemHeight}px, 0)`;
-      itemsEl.innerHTML = items
-        .slice(start, end)
-        .map(
-          (chapter) => `
-        <button type="button" class="toc-item${chapter.n === currentN ? " active" : ""}" data-n="${chapter.n}" role="listitem">
-          <span class="toc-item__title">${escapeHtml(chapter.title)}</span>
-          ${
-            chapter.updated_at
-              ? `<span class="toc-item__date">${escapeHtml(formatUpdatedAt(chapter.updated_at))}</span>`
-              : ""
-          }
-        </button>`
-        )
-        .join("");
+      itemsEl.innerHTML = items.slice(start, end).map(renderItem).join("");
     }
 
-    function scheduleRender() {
-      if (rafId) return;
+    function scheduleRender(options = {}) {
+      if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         rafId = 0;
-        render();
+        render(options);
       });
     }
 
     function scrollToIndex(index, { smooth = false, center = true } = {}) {
       if (index < 0 || index >= items.length) return;
+      render({ forceHeight: true });
       const top = index * itemHeight;
       let nextTop = top;
       if (center) {
@@ -100,13 +113,12 @@
     });
 
     const resizeObserver = new ResizeObserver(() => {
-      const nextHeight = measureTocItemHeight();
-      if (nextHeight !== itemHeight) {
-        itemHeight = nextHeight;
-      }
-      scheduleRender();
+      measureHeight();
+      scheduleRender({ forceHeight: true });
     });
     resizeObserver.observe(container);
+
+    measureHeight();
 
     return {
       setItems(nextItems, { scrollToN = null, scrollToTop = false } = {}) {
@@ -115,6 +127,9 @@
           render();
           return;
         }
+
+        render({ forceHeight: true });
+
         if (scrollToTop) {
           container.scrollTop = 0;
         } else if (scrollToN != null) {
@@ -124,6 +139,7 @@
             return;
           }
         }
+
         scheduleRender();
       },
       setCurrentN(nextN) {
@@ -136,6 +152,11 @@
       },
       scrollToTop() {
         container.scrollTop = 0;
+        scheduleRender();
+      },
+      refresh() {
+        measureHeight();
+        render({ forceHeight: true });
         scheduleRender();
       },
       destroy() {

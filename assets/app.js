@@ -45,6 +45,22 @@
     if (!iso) return "";
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return "";
+    return d.toLocaleString("vi-VN", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    });
+  }
+
+  function formatUpdatedAtShort(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return "";
     return d.toLocaleString("vi-VN", { dateStyle: "short", timeStyle: "short" });
   }
 
@@ -164,10 +180,18 @@
     $("prevBtn").disabled = idx <= 0;
     $("nextBtn").disabled = idx < 0 || idx >= chapters.length - 1;
     const ch = byN[currentN];
-    const displayNo = displayChapterNo(ch) ?? currentN;
-    const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
-    const label = idx >= 0 ? `${displayNo}/${total}` : "—";
-    $("navCenter").textContent = label;
+    const navCenter = $("navCenter");
+    if (idx >= 0 && ch?.updated_at) {
+      navCenter.textContent = formatUpdatedAt(ch.updated_at);
+      navCenter.dateTime = ch.updated_at;
+      navCenter.title = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
+    } else {
+      const displayNo = displayChapterNo(ch) ?? currentN;
+      const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
+      navCenter.textContent = idx >= 0 ? `${displayNo}/${total}` : "—";
+      navCenter.dateTime = "";
+      navCenter.title = "";
+    }
     updateProgress();
   }
 
@@ -218,13 +242,8 @@
     showReaderShell();
     chapterTitle.textContent = ch.title;
     chapterMeta.textContent = `Chương ${displayChapterNo(ch) ?? n} · ${ch.story}`;
-    if (ch.updated_at) {
-      chapterUpdated.textContent = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
-      chapterUpdated.classList.remove("hidden");
-    } else {
-      chapterUpdated.textContent = "";
-      chapterUpdated.classList.add("hidden");
-    }
+    chapterUpdated.textContent = "";
+    chapterUpdated.classList.add("hidden");
     document.title = `${ch.title} · ${SITE_TITLE}`;
     showSkeleton();
     updateNavButtons();
@@ -252,7 +271,16 @@
     sheet.setAttribute("aria-hidden", "false");
     sheetBackdrop.classList.add("is-open");
     document.body.style.overflow = "hidden";
-    if (sheet === tocSheet) renderToc({ scrollToCurrent: true });
+    if (sheet === tocSheet) {
+      renderToc({ scrollToCurrent: true });
+      requestAnimationFrame(() => {
+        tocVirtual?.refresh();
+        requestAnimationFrame(() => {
+          tocVirtual?.scrollToN(currentN, false);
+          tocVirtual?.refresh();
+        });
+      });
+    }
   }
 
   function closeAllSheets() {
@@ -268,6 +296,7 @@
   function focusDesktopToc() {
     const input = $("desktopSearchInput");
     input?.focus();
+    desktopTocVirtual?.refresh();
     desktopTocVirtual?.scrollToN(currentN, true);
   }
 
@@ -322,7 +351,7 @@
   function setupVirtualToc() {
     const tocOptions = {
       escapeHtml,
-      formatUpdatedAt,
+      formatUpdatedAt: formatUpdatedAtShort,
       onSelect: (n) => {
         openChapter(n);
         closeAllSheets();
@@ -429,6 +458,8 @@
 
   window.addEventListener("resize", () => {
     syncReadingLayout();
+    tocVirtual?.refresh();
+    desktopTocVirtual?.refresh();
     if (activeSheet === tocSheet && isDesktop()) closeAllSheets();
   });
 
