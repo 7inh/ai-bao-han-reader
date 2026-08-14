@@ -6,7 +6,6 @@
   const THEME_KEY = "ai-bao-han-theme";
   const MIN_FONT = 0.9;
   const MAX_FONT = 1.4;
-  const TOC_WINDOW = 80;
   const DESKTOP_MQ = "(min-width: 768px)";
   const SITE_TITLE = "Ai Bảo Hắn Tu Tiên";
 
@@ -18,6 +17,8 @@
   let searchQuery = "";
   let activeSheet = null;
   const cache = new Map();
+  let tocVirtual = null;
+  let desktopTocVirtual = null;
 
   const $ = (id) => document.getElementById(id);
 
@@ -176,42 +177,18 @@
     return chapters.filter((c) => c.title.toLowerCase().includes(q));
   }
 
-  function buildTocSlice(list) {
-    if (!list.length) return [];
-    if (searchQuery.trim()) return list.slice(0, 120);
-
-    if (currentN) {
-      const centerIdx = list.findIndex((c) => c.n === currentN);
-      if (centerIdx >= 0) {
-        const half = Math.floor(TOC_WINDOW / 2);
-        const start = Math.max(0, centerIdx - half);
-        return list.slice(start, Math.min(list.length, start + TOC_WINDOW));
-      }
-    }
-    return list.slice(0, TOC_WINDOW);
-  }
-
-  function renderTocList(container) {
+  function renderToc({ scrollToCurrent = false, scrollToTop = false } = {}) {
     const list = filteredChapters();
-    if (!list.length) {
-      container.innerHTML = '<div class="toc-empty">Không có kết quả.</div>';
-      return;
-    }
-    const slice = buildTocSlice(list);
-    container.innerHTML = slice
-      .map(
-        (c) => `
-        <button type="button" class="toc-item${c.n === currentN ? " active" : ""}" data-n="${c.n}">
-          <span class="toc-item__title">${escapeHtml(c.title)}</span>
-          ${c.updated_at ? `<span class="toc-item__date">${escapeHtml(formatUpdatedAt(c.updated_at))}</span>` : ""}
-        </button>`
-      )
-      .join("");
-  }
+    const scrollOpts = scrollToTop
+      ? { scrollToTop: true }
+      : scrollToCurrent && currentN != null
+        ? { scrollToN: currentN }
+        : {};
 
-  function renderToc() {
-    renderTocList(tocList);
-    renderTocList(desktopTocList);
+    tocVirtual?.setItems(list, scrollOpts);
+    tocVirtual?.setCurrentN(currentN);
+    desktopTocVirtual?.setItems(list, scrollOpts);
+    desktopTocVirtual?.setCurrentN(currentN);
   }
 
   function showSkeleton() {
@@ -275,7 +252,7 @@
     sheet.setAttribute("aria-hidden", "false");
     sheetBackdrop.classList.add("is-open");
     document.body.style.overflow = "hidden";
-    if (sheet === tocSheet) renderToc();
+    if (sheet === tocSheet) renderToc({ scrollToCurrent: true });
   }
 
   function closeAllSheets() {
@@ -291,10 +268,7 @@
   function focusDesktopToc() {
     const input = $("desktopSearchInput");
     input?.focus();
-    const active = desktopTocList.querySelector(".toc-item.active");
-    if (active) {
-      active.scrollIntoView({ block: "nearest", behavior: "smooth" });
-    }
+    desktopTocVirtual?.scrollToN(currentN, true);
   }
 
   function openToc() {
@@ -304,15 +278,6 @@
       return;
     }
     openSheet(tocSheet);
-  }
-
-  function bindTocClicks(container) {
-    container.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-n]");
-      if (!btn) return;
-      openChapter(Number(btn.dataset.n));
-      closeAllSheets();
-    });
   }
 
   function setupScrollCollapse() {
@@ -354,6 +319,23 @@
     );
   }
 
+  function setupVirtualToc() {
+    const tocOptions = {
+      escapeHtml,
+      formatUpdatedAt,
+      onSelect: (n) => {
+        openChapter(n);
+        closeAllSheets();
+      },
+    };
+
+    tocVirtual = createVirtualTocList(tocList, tocOptions);
+    desktopTocVirtual = createVirtualTocList(desktopTocList, {
+      ...tocOptions,
+      onSelect: (n) => openChapter(n),
+    });
+  }
+
   async function init() {
     setTheme(getSavedTheme());
     setFontSize(getSavedFontSize());
@@ -374,6 +356,9 @@
     chapterCountMeta.textContent = `${maxStoryNo || chapters.length} chương`;
     $("jumpInput").max = String(maxStoryNo || chapters.length);
     $("jumpInput").placeholder = "Số chương";
+
+    setupVirtualToc();
+    renderToc({ scrollToCurrent: Boolean(currentN) });
 
     const saved = Number(localStorage.getItem(STORAGE_KEY));
     const savedChapter = saved ? byStoryNo[saved] ?? byN[saved] : null;
@@ -424,13 +409,10 @@
     searchQuery = e.target.value;
     $("searchInput").value = searchQuery;
     $("desktopSearchInput").value = searchQuery;
-    renderToc();
+    renderToc({ scrollToTop: true });
   };
   $("searchInput").addEventListener("input", onSearch);
   $("desktopSearchInput").addEventListener("input", onSearch);
-
-  bindTocClicks(tocList);
-  bindTocClicks(desktopTocList);
 
   window.addEventListener("hashchange", () => {
     const n = parseHash();
