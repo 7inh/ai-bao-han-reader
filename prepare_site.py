@@ -48,17 +48,17 @@ def is_chapter_file(path: Path) -> bool:
 
 def collect_chapter_files(source: Path) -> list[Path]:
     files = [p for p in source.glob("*.txt") if is_chapter_file(p)]
-    files.sort(key=lambda p: p.name)
+    files.sort(key=lambda p: (parse_chapter_no(p.name) or 10**9, p.name))
     return files
 
 
 def build_story_index(files: list[Path]) -> dict[int, int]:
-    """Map story chapter number -> reader list index n."""
+    """Map story chapter number -> reader list index n (n == story_no)."""
     mapping: dict[int, int] = {}
-    for n, src in enumerate(files, start=1):
+    for src in files:
         chapter_no = parse_chapter_no(src.name)
         if chapter_no is not None:
-            mapping[chapter_no] = n
+            mapping[chapter_no] = chapter_no
     return mapping
 
 
@@ -87,20 +87,17 @@ def get_updated_at(src: Path, reports_dir: Path) -> str | None:
     return datetime.fromtimestamp(mtime, tz=VN_TZ).isoformat(timespec="seconds")
 
 
-def chapter_entry(n: int, src: Path, reports_dir: Path) -> dict:
+def chapter_entry(story_no: int, src: Path, reports_dir: Path) -> dict:
     title = parse_title(src.name) or src.stem
-    rel_path = f"chapters/chuong-{n}.txt"
-    story_no = parse_chapter_no(src.name)
-    entry: dict = {
-        "n": n,
+    rel_path = f"chapters/chuong-{story_no}.txt"
+    return {
+        "n": story_no,
+        "story_no": story_no,
         "title": title,
         "story": STORY_TITLE,
         "path": rel_path,
         "updated_at": get_updated_at(src, reports_dir),
     }
-    if story_no is not None:
-        entry["story_no"] = story_no
-    return entry
 
 
 def load_existing_meta(out: Path) -> list[dict] | None:
@@ -137,21 +134,27 @@ def build(
         start = from_ch or 1
         end = to_ch or max(story_index)
         updated_count = 0
+        meta_by_story = {c["story_no"]: c for c in existing if c.get("story_no") is not None}
         meta = list(existing)
 
         for story_no in range(start, end + 1):
-            reader_n = story_index.get(story_no)
             src = find_file_by_story_no(files, story_no)
-            if reader_n is None or src is None:
+            if src is None:
                 print(f"  WARN: story chapter {story_no} not found, skip")
                 continue
 
-            dest = out / f"chapters/chuong-{reader_n}.txt"
+            dest = out / f"chapters/chuong-{story_no}.txt"
             dest.write_text(normalize_text(src.read_text(encoding="utf-8")), encoding="utf-8")
-            entry = chapter_entry(reader_n, src, reports_dir)
-            meta[reader_n - 1] = entry
+            entry = chapter_entry(story_no, src, reports_dir)
+            if story_no in meta_by_story:
+                idx = next(i for i, c in enumerate(meta) if c.get("story_no") == story_no)
+                meta[idx] = entry
+            else:
+                meta.append(entry)
+                meta.sort(key=lambda c: c.get("story_no") or 0)
+            meta_by_story[story_no] = entry
             updated_count += 1
-            print(f"  [story={story_no} n={reader_n}] {entry['title']}")
+            print(f"  [story={story_no}] {entry['title']}")
 
         (out / "chapters.json").write_text(
             json.dumps(meta, ensure_ascii=False, indent=2),
@@ -164,15 +167,23 @@ def build(
         return updated_count
 
     meta: list[dict] = []
-    for n, src in enumerate(files, start=1):
-        dest = out / f"chapters/chuong-{n}.txt"
+    seen: set[int] = set()
+    for src in files:
+        story_no = parse_chapter_no(src.name)
+        if story_no is None or story_no in seen:
+            continue
+        seen.add(story_no)
+        dest = out / f"chapters/chuong-{story_no}.txt"
         dest.write_text(normalize_text(src.read_text(encoding="utf-8")), encoding="utf-8")
-        entry = chapter_entry(n, src, reports_dir)
+        entry = chapter_entry(story_no, src, reports_dir)
         meta.append(entry)
-        if n <= 3 or n == len(files):
-            print(f"  [{n}/{len(files)}] {entry['title']}")
-        elif n == 4:
+        if len(meta) <= 3:
+            print(f"  [{len(meta)}] {entry['title']}")
+        elif len(meta) == 4:
             print("  ...")
+    meta.sort(key=lambda c: c["story_no"])
+    if meta:
+        print(f"  [{len(meta)}] {meta[-1]['title']}")
 
     (out / "chapters.json").write_text(
         json.dumps(meta, ensure_ascii=False, indent=2),
@@ -199,10 +210,78 @@ def reader_indices_for_story_range(
     story_index = build_story_index(files)
     indices = []
     for story_no in range(from_ch, to_ch + 1):
-        n = story_index.get(story_no)
-        if n is not None:
-            indices.append(n)
+        if story_no in story_index:
+            indices.append(story_no)
     return indices
+
+
+def repair_from_built_files(out: Path) -> int:
+    """Rebuild chapters.json from deployed chapter text files (content is source of truth)."""
+    chapters_dir = out / "chapters"
+    if not chapters_dir.is_dir():
+        raise SystemExit(f"Chapters dir not found: {chapters_dir}")
+
+    existing_path = out / "chapters.json"
+    existing = load_existing_meta(out) if existing_path.exists() else []
+    by_reader_n = {c["n"]: c for c in existing}
+
+    content_map: dict[int | None, list[dict]] = {}
+    for txt in chapters_dir.glob("chuong-*.txt"):
+        reader_n = int(txt.stem.split("-", 1)[1])
+        text = txt.read_text(encoding="utf-8")
+        first = text.splitlines()[0].strip() if text else ""
+        match = re.match(r"Chương\s+(\d+)", first)
+        story_no = int(match.group(1)) if match else None
+        meta = by_reader_n.get(reader_n, {})
+        content_map.setdefault(story_no, []).append(
+            {
+                "reader_n": reader_n,
+                "path": f"chapters/{txt.name}",
+                "title_from_content": first,
+                "meta_title": meta.get("title"),
+                "meta_story_no": meta.get("story_no"),
+                "updated_at": meta.get("updated_at"),
+                "title_match": meta.get("story_no") == story_no,
+            }
+        )
+
+    def pick_best(candidates: list[dict]) -> dict:
+        matched = [c for c in candidates if c["title_match"]]
+        if matched:
+            return matched[0]
+        return candidates[0]
+
+    meta: list[dict] = []
+    for story_no in sorted(k for k in content_map if k is not None):
+        candidates = content_map[story_no]
+        best = pick_best(candidates) if len(candidates) > 1 else candidates[0]
+        title = best["meta_title"]
+        if not title or not title.startswith(f"Chương {story_no}"):
+            title_from_content = best["title_from_content"]
+            if " - " in title_from_content and ":" not in title_from_content:
+                title_from_content = title_from_content.replace(" - ", ": ", 1)
+            title = (
+                title_from_content
+                if title_from_content.startswith("Chương")
+                else f"Chương {story_no}"
+            )
+        meta.append(
+            {
+                "n": story_no,
+                "story_no": story_no,
+                "title": title,
+                "story": STORY_TITLE,
+                "path": best["path"],
+                "updated_at": best.get("updated_at"),
+            }
+        )
+
+    existing_path.write_text(
+        json.dumps(meta, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    print(f"Repaired {len(meta)} chapter(s) in chapters.json")
+    return len(meta)
 
 
 def main() -> None:
@@ -213,7 +292,17 @@ def main() -> None:
     parser.add_argument("--cover", type=Path, default=DEFAULT_COVER)
     parser.add_argument("--from", dest="from_ch", type=int, help="Story chapter start")
     parser.add_argument("--to", dest="to_ch", type=int, help="Story chapter end")
+    parser.add_argument(
+        "--repair",
+        action="store_true",
+        help="Rebuild chapters.json from existing chapter text files",
+    )
     args = parser.parse_args()
+
+    if args.repair:
+        print(f"Repairing chapters.json in {args.out}")
+        repair_from_built_files(args.out)
+        return
 
     if not args.source.is_dir():
         raise SystemExit(f"Source not found: {args.source}")

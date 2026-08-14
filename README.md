@@ -17,6 +17,8 @@ python3 -m http.server 8080
 
 ```bash
 python3 prepare_site.py
+# repair metadata from deployed chapter files (no source needed):
+python3 prepare_site.py --repair
 # optional:
 python3 prepare_site.py --source ../text/vol01 --out .
 ```
