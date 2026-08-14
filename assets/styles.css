@@ -554,6 +554,24 @@ button {
   flex: 1;
   padding: 0 0.5rem 1rem;
   -webkit-overflow-scrolling: touch;
+  min-height: 0;
+}
+
+.toc-virtual {
+  position: relative;
+}
+
+.toc-virtual__track {
+  width: 100%;
+  pointer-events: none;
+}
+
+.toc-virtual__items {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  will-change: transform;
 }
 
 .sheet--toc .toc {
