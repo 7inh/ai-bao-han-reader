@@ -102,7 +102,6 @@
     const num = Number(input);
     if (!Number.isFinite(num) || num < 1) return null;
     if (byStoryNo[num]) return byStoryNo[num].n;
-    if (byN[num]) return num;
     return null;
   }
 
@@ -377,9 +376,10 @@
     $("jumpInput").placeholder = "Số chương";
 
     const saved = Number(localStorage.getItem(STORAGE_KEY));
-    if (Number.isFinite(saved) && byN[saved]) {
+    const savedChapter = saved ? byStoryNo[saved] ?? byN[saved] : null;
+    if (savedChapter) {
       resumeBtn.classList.remove("hidden");
-      resumeBtn.onclick = () => openChapter(saved);
+      resumeBtn.onclick = () => openChapter(savedChapter.n);
     }
 
     const hashN = parseHash();
