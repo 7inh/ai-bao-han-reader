@@ -298,6 +298,11 @@ button {
   display: none;
 }
 
+.reader-top.is-collapsed .reader-top__count {
+  font-size: 0.62rem;
+  max-width: 9rem;
+}
+
 .reader-top__meta {
   min-width: 0;
 }
@@ -327,10 +332,13 @@ button {
 }
 
 .reader-top__count {
-  font-size: 0.78rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--muted);
-  white-space: nowrap;
+  text-align: right;
+  max-width: 11rem;
+  white-space: normal;
 }
 
 .chapter-body {
@@ -499,12 +507,31 @@ button {
   border: 1px solid var(--border);
   border-bottom: none;
   box-shadow: var(--shadow);
-  transform: translateY(100%);
+  transform: translateY(110%);
   transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  overflow: hidden;
 }
 
 .sheet.is-open {
   transform: translateY(0);
+}
+
+.sheet--toc {
+  transform: none;
+  bottom: auto;
+  top: 100%;
+  transition: top 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.sheet--toc.is-open {
+  transform: none;
+  top: auto;
+  bottom: 0;
+}
+
+.sheet--toc.is-open .toc {
+  touch-action: pan-y;
+  overscroll-behavior: contain;
 }
 
 .sheet__handle {
@@ -559,11 +586,13 @@ button {
 
 .toc-virtual {
   position: relative;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
-.toc-virtual__track {
+.toc-virtual__spacer {
+  position: relative;
   width: 100%;
-  pointer-events: none;
 }
 
 .toc-virtual__items {
@@ -575,7 +604,8 @@ button {
 }
 
 .sheet--toc .toc {
-  max-height: 60dvh;
+  flex: 1;
+  min-height: 0;
 }
 
 .toc-item {
