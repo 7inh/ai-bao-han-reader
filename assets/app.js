@@ -28,7 +28,6 @@
   const progressTrack = $("progressTrack");
   const progressFill = $("progressFill");
   const chapterTitle = $("chapterTitle");
-  const chapterMeta = $("chapterMeta");
   const chapterUpdated = $("chapterUpdated");
   const chapterContent = $("chapterContent");
   const chapterCountMeta = $("chapterCountMeta");
@@ -180,18 +179,9 @@
     $("prevBtn").disabled = idx <= 0;
     $("nextBtn").disabled = idx < 0 || idx >= chapters.length - 1;
     const ch = byN[currentN];
-    const navCenter = $("navCenter");
-    if (idx >= 0 && ch?.updated_at) {
-      navCenter.textContent = formatUpdatedAt(ch.updated_at);
-      navCenter.dateTime = ch.updated_at;
-      navCenter.title = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
-    } else {
-      const displayNo = displayChapterNo(ch) ?? currentN;
-      const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
-      navCenter.textContent = idx >= 0 ? `${displayNo}/${total}` : "—";
-      navCenter.dateTime = "";
-      navCenter.title = "";
-    }
+    const displayNo = displayChapterNo(ch) ?? currentN;
+    const total = maxStoryNo > 0 ? maxStoryNo : chapters.length;
+    $("navCenter").textContent = idx >= 0 ? `${displayNo}/${total}` : "—";
     updateProgress();
   }
 
@@ -241,9 +231,17 @@
     currentN = n;
     showReaderShell();
     chapterTitle.textContent = ch.title;
-    chapterMeta.textContent = `Chương ${displayChapterNo(ch) ?? n} · ${ch.story}`;
-    chapterUpdated.textContent = "";
-    chapterUpdated.classList.add("hidden");
+    if (ch.updated_at) {
+      chapterUpdated.textContent = formatUpdatedAt(ch.updated_at);
+      chapterUpdated.dateTime = ch.updated_at;
+      chapterUpdated.title = `Cập nhật: ${formatUpdatedAt(ch.updated_at)}`;
+      chapterUpdated.classList.remove("hidden");
+    } else {
+      chapterUpdated.textContent = "";
+      chapterUpdated.dateTime = "";
+      chapterUpdated.title = "";
+      chapterUpdated.classList.add("hidden");
+    }
     document.title = `${ch.title} · ${SITE_TITLE}`;
     showSkeleton();
     updateNavButtons();
